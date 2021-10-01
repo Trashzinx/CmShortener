@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# TPUT CONF :-:
+
+BLACK=$(tput setaf 0)
+RED=$(tput setaf 1)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+BLUE=$(tput setaf 4)
+MAGENTA=$(tput setaf 5)
+CYAN=$(tput setaf 6)
+WHITE=$(tput setaf 7)
+BOLD=$(tput bold)
+REDBG=$(tput setab 1)
+RESET=$(tput sgr0)
+
+#######################
+
+check_dependents()
+{
+        if [[ `command -v figlet` && `command -v toilet` && `command -v lolcat` ]]; then
+                menu
+        else
+                apt-get install python python2 figlet toilet -y
+                pip install lolcat
+                menu
+        fi
+}
+
+menu()
+{
+        clear
+        toilet -F border -f smslant Cm Shortener|lolcat
+        echo -e "${WHITE}┏━━━━[DIGITE A URL]${RESET}"
+        echo -e "${WHITE}┃${RESET}"
+        echo -ne "${WHITE}┗━━➤ ${RESET}"${GREEN}
+        read -r url
+        link
+}
+
+link()
+{
+        if [[ "$url" ]]; then
+                curl -s "https://is.gd/create.php?format=simple&url=$url" > link.txt
+                proto=$(tail -n1 link.txt | cut -d "/" -f1)
+                domain=$(head -n1 link.txt | cut -d "/" -f4)
+                opcao
+        else
+                clear
+                echo -e "\n\n${RED}Verifique se a url está correta...\n\n"
+                exit 1
+        fi
+}
+
+opcao()
+{
+        echo -ne ${RESET}"\n\n${BOLD}Deseja Personalizar a Url [Y/N] "; read ys
+        if [[ "$ys" == "Y" || "$ys" == "y" ]]; then
+                echo -ne "\n\n${BOLD}Digite a Palavra Para Url ${GREEN}[Ex: globo]${RESET} >> "${WHITE}
+                read -r palavra
+                clear
+                echo -e "\n\n${BOLD}URL: ${GREEN}$proto//$palavra@is.gd/$domain\n\n"
+
+        elif [[ "$ys" == "N" || "$ys" == "n" ]];then
+                link=$(cat link.txt | tr -d '%')
+                clear
+                echo -ne "\n\n${BOLD}URL: ${GREEN}$link\n\n"
+        fi
+        if [[ -e "link.txt" ]]; then
+                rm -rf link.txt
+        fi
+}
+check_dependents
