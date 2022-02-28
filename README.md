@@ -47,7 +47,7 @@ $ ./CmShortener
   <h1>💖 Contribuintes: </h1>
   <table>
     <tr>
-      <td align="center"><a href="https://github.com/Trashzinx"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/87456603?v=4" width="100px;" alt=""/><br /><sub><b>@AthenaD3V</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Trashzinx"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/87456603?v=4" width="100px;" alt=""/><br /><sub><b>@Trashzinx</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/ErickInvation"><img style="border-radius: 50%;" src="https://avatars.githubusercontent.com/u/89029936?v=4" width="100px;" alt=""/><br /><sub><b>@ErickInvation</b></sub></a><br /></td>
   </table>
 </div>
